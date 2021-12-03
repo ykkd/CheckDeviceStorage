@@ -30,9 +30,9 @@ extension ViewController {
         }
         
         do {
-            try text += "[getAvailableDiskCapacityViaFileManager]\n \(self.getAvailableDiskCapacityViaURL()) \n"
+            try text += "[getAvailableDiskCapacityViaURL]\n \(self.getAvailableDiskCapacityViaURL()) \n"
         } catch {
-            text += "[getAvailableDiskCapacityViaFileManager]\n error: \(error.localizedDescription) \n"
+            text += "[getAvailableDiskCapacityViaURL]\n error: \(error.localizedDescription) \n"
         }
         
         print("results: \(text)")
