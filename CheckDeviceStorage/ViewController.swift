@@ -17,6 +17,19 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - Tap Action
+extension ViewController {
+    
+    @IBAction func didTapAddDataButton(_ sender: Any) {
+        self.addDataAtDocumentDir()
+    }
+    
+    @IBAction func didTapRefreshButton(_ sender: Any) {
+        self.checkDeviceStorage()
+    }
+}
+
+// MARK: - Get Storage Info
 extension ViewController {
     
     private func checkDeviceStorage() {
@@ -24,15 +37,15 @@ extension ViewController {
         
         do {
             let bytes = try self.getAvailableDiskCapacityViaFileManager()
-            text += "[getAvailableDiskCapacityViaFileManager] \n \(ByteCountFormatter.string(fromByteCount: bytes, countStyle: .decimal)), \n (\(bytes)) \n"
+            text += "[getAvailableDiskCapacityViaFileManager] \n \(ByteCountFormatter.string(fromByteCount: bytes, countStyle: .decimal)), \n (\(bytes)) \n\n\n"
         } catch {
-            text += "[getAvailableDiskCapacityViaFileManager] \n\(error.localizedDescription)"
+            text += "[getAvailableDiskCapacityViaFileManager] \n\(error.localizedDescription)\n\n\n"
         }
         
         do {
             try text += "[getAvailableDiskCapacityViaURL]\n \(self.getAvailableDiskCapacityViaURL()) \n"
         } catch {
-            text += "[getAvailableDiskCapacityViaURL]\n error: \(error.localizedDescription) \n"
+            text += "[getAvailableDiskCapacityViaURL]\n error: \(error.localizedDescription) \n\n\n"
         }
         
         print("results: \(text)")
@@ -67,18 +80,55 @@ extension ViewController {
             
             var text = String()
             
-            result.allValues.forEach { key, value in
-                text += "- \(key) \n \(ByteCountFormatter.string(fromByteCount: value as! Int64, countStyle: .decimal)), \n \(value) \n"
-            }
+            result.allValues
+                .filter { $0.key == .volumeAvailableCapacityKey }
+                .forEach { key, value in
+                    text += "- \(key) \n \(ByteCountFormatter.string(fromByteCount: value as! Int64, countStyle: .decimal)), \n \(value) \n\n\n"
+                }
+            
+            result.allValues
+                .filter { $0.key == .volumeAvailableCapacityForImportantUsageKey }
+                .forEach { key, value in
+                    text += "- \(key) \n \(ByteCountFormatter.string(fromByteCount: value as! Int64, countStyle: .decimal)), \n \(value) \n\n\n"
+                }
+            
+            result.allValues
+                .filter { $0.key == .volumeAvailableCapacityForOpportunisticUsageKey }
+                .forEach { key, value in
+                    text += "- \(key) \n \(ByteCountFormatter.string(fromByteCount: value as! Int64, countStyle: .decimal)), \n \(value) \n\n\n"
+                }
+            
+            result.allValues
+                .filter { $0.key == .volumeTotalCapacityKey }
+                .forEach { key, value in
+                    text += "- \(key) \n \(ByteCountFormatter.string(fromByteCount: value as! Int64, countStyle: .decimal)), \n \(value) \n\n\n"
+                }
+            
             return text
         } catch {
             throw DiskCapacityError.url
         }
     }
-    
-    
 }
 
+// MARK: - Add Data
+extension ViewController {
+    
+    private func addDataAtDocumentDir() {
+        DispatchQueue.main.async {
+            let d = Data.init(repeating: 100, count: 1000000000)
+            do {
+                let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let destinationPath = documentPath.appendingPathComponent("\(Date())")
+                try d.write(to: destinationPath)
+            } catch {
+                print("error: \(error)")
+            }
+        }
+    }
+}
+
+// MARK: - Error
 extension ViewController {
     
     enum DiskCapacityError: Error {

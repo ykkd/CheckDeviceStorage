@@ -18,19 +18,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibs-rG-Kla">
-                                <rect key="frame" x="16" y="108" width="382" height="690"/>
+                                <rect key="frame" x="16" y="60" width="382" height="674"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSv-gs-3R6">
+                                <rect key="frame" x="159" y="742" width="96" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Aph-mh-iOD"/>
+                                    <constraint firstAttribute="width" constant="96" id="CAe-MW-tzs"/>
+                                </constraints>
+                                <state key="normal" title="Add 1GB"/>
+                                <connections>
+                                    <action selector="didTapAddDataButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QdI-lz-faC"/>
+                                    <action selector="didTapRefreshButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ugx-WR-Rf3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXo-cj-Rdt">
+                                <rect key="frame" x="159" y="798" width="96" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="gDk-PR-RZ3"/>
+                                    <constraint firstAttribute="height" constant="48" id="xyF-X9-CDv"/>
+                                </constraints>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="didTapRefreshButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="THM-v4-Cyp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ibs-rG-Kla" secondAttribute="bottom" constant="64" id="1Cg-Bg-EoT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ibs-rG-Kla" secondAttribute="trailing" constant="16" id="3P6-EJ-qVD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dXo-cj-Rdt" secondAttribute="bottom" constant="16" id="940-Wb-l8e"/>
                             <constraint firstItem="Ibs-rG-Kla" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="YbO-mi-ulq"/>
-                            <constraint firstItem="Ibs-rG-Kla" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="64" id="i4Z-7F-hgS"/>
+                            <constraint firstItem="dXo-cj-Rdt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fhs-0I-r1c"/>
+                            <constraint firstItem="Ibs-rG-Kla" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="i4Z-7F-hgS"/>
+                            <constraint firstItem="tSv-gs-3R6" firstAttribute="top" secondItem="Ibs-rG-Kla" secondAttribute="bottom" constant="8" id="jEO-tZ-70o"/>
+                            <constraint firstItem="dXo-cj-Rdt" firstAttribute="top" secondItem="tSv-gs-3R6" secondAttribute="bottom" constant="8" id="xtz-dn-Oty"/>
+                            <constraint firstItem="tSv-gs-3R6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yXu-bi-ke4"/>
                         </constraints>
                     </view>
                     <connections>
