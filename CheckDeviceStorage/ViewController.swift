@@ -116,11 +116,11 @@ extension ViewController {
     
     private func addDataAtDocumentDir() {
         DispatchQueue.main.async {
-            let d = Data.init(repeating: 100, count: 1000000000)
+            let d = Data.init(repeating: 1, count: 1073741824)
             do {
-                let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                let destinationPath = documentPath.appendingPathComponent("\(Date())")
-                try d.write(to: destinationPath)
+                let documentPath = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                let destinationPathForDocument = documentPath.appendingPathComponent("\(Date())")
+                try d.write(to: destinationPathForDocument)
             } catch {
                 print("error: \(error)")
             }
